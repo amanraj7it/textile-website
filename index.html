@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumière | High-End Interior Design</title>
+    <meta name="description" content="Premium Interior Design Studio. We craft spaces that inspire.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="loader">
+        <div class="loader-content">
+            <h2>Lumière.</h2>
+            <p>Loading Experience (<span id="load-progress">0</span>%)</p>
+        </div>
+    </div>
+    <canvas id="scroll-canvas"></canvas>
+    <div class="canvas-overlay"></div>
+
+    <nav class="navbar">
+        <div class="logo">Lumière.</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#vision">Vision</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Studio</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-extra">
+            <a href="#" class="nav-book">Book Consult</a>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <section id="home" class="hero-section">
+            <p class="hero-label">Interior Architecture & Design</p>
+            <h1 class="hero-title">Redefining Space</h1>
+            <p class="hero-subtitle">Scroll to explore our vision</p>
+            <div class="scroll-indicator">
+                <span></span>
+            </div>
+        </section>
+
+        <section id="vision" class="content-section fade-in">
+            <div class="section-text">
+                <h2>The Art of Living</h2>
+                <p>At Lumière, we believe interior design is more than arranging furniture. It's about sculpting space,
+                    bending light, and creating an atmosphere that resonates with your soul. We blur the lines between
+                    art gallery and modern living.</p>
+                <div class="stats-row">
+                    <div class="stat">
+                        <h3>15+</h3>
+                        <span>Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <h3>120</h3>
+                        <span>Curated Projects</span>
+                    </div>
+                    <div class="stat">
+                        <h3>7</h3>
+                        <span>Design Awards</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="spacer-section"></section>
+
+        <section id="services" class="content-section right-aligned fade-in">
+            <div class="section-text">
+                <h2>Our Expertise</h2>
+                <p>We offer a comprehensive suite of design services tailored to elevate your environment.</p>
+
+                <div class="services-list">
+                    <div class="service-item">
+                        <i class="fa-solid fa-house"></i>
+                        <div>
+                            <h4>Residential Design</h4>
+                            <p>Crafting bespoke homes that reflect your personal narrative.</p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <i class="fa-solid fa-building"></i>
+                        <div>
+                            <h4>Commercial Spaces</h4>
+                            <p>Elevating brand identity through architectural interiors.</p>
+                        </div>
+                    </div>
+                    <div class="service-item">
+                        <i class="fa-solid fa-couch"></i>
+                        <div>
+                            <h4>Furniture Curation</h4>
+                            <p>Sourcing rare and custom pieces from global artisans.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="spacer-section"></section>
+
+        <section class="quote-section content-section center-aligned fade-in">
+            <div class="quote-container">
+                <i class="fa-solid fa-quote-left quote-icon"></i>
+                <h2>"A room should never allow the eye to settle in one place. It should smile at you and create
+                    fantasy."</h2>
+                <p class="quote-author">— Juan Montoya</p>
+            </div>
+        </section>
+
+        <section class="spacer-section"></section>
+
+        <section id="process" class="content-section left-aligned fade-in">
+            <div class="section-text">
+                <h2>Our Process</h2>
+                <p>Meticulous attention to detail at every phase, ensuring a seamless translation from
+                    conceptual vision to tangible reality.</p>
+
+                <div class="process-steps">
+                    <div class="process-step">
+                        <span class="step-num">01</span>
+                        <div class="step-content">
+                            <h4>Discovery & Consultation</h4>
+                            <p>Understanding your lifestyle, aesthetic aspirations, and spatial requirements.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">02</span>
+                        <div class="step-content">
+                            <h4>Conceptual Design</h4>
+                            <p>Developing mood boards, architectural sketches, and material palettes.</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">03</span>
+                        <div class="step-content">
+                            <h4>Implementation</h4>
+                            <p>Flawless execution governed by strict project management and artisan
+                                coordination.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="spacer-section"></section>
+
+        <section class="press-banner fade-in">
+            <p>As Featured In</p>
+            <div class="press-logos">
+                <span>Architectural Digest</span>
+                <span>Vogue Living</span>
+                <span>Elle Decor</span>
+                <span>Design Milk</span>
+            </div>
+        </section>
+
+        <section class="spacer-section"></section>
+
+        <section id="contact" class="content-section center-aligned fade-in">
+            <div class="section-text contact-card">
+                <h2>Begin Your Journey</h2>
+                <p>Let us transform your vision into reality. Reach out to schedule a private consultation with
+                    our principal designers.</p>
+
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email for our journal..." required>
+                    <button type="submit" class="cta-button">Subscribe</button>
+                </div>
+
+                <a href="#" class="cta-button outline-button">Initiate Project</a>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-grid">
+                <div class="footer-col brand-col">
+                    <h3>Lumière.</h3>
+                    <p>Elevating everyday living into extraordinary experiences.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <a href="#">Projects</a>
+                    <a href="#">Process</a>
+                    <a href="#">Journal</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Studio</h4>
+                    <p>124 Design District Ave<br>New York, NY 10012</p>
+                    <p>contact@lumiere.design</p>
+                </div>
+                <div class="footer-col social-col">
+                    <h4>Follow</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#"><i class="fa-brands fa-houzz"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Lumière Interior Design. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
