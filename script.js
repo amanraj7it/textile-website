@@ -17,32 +17,69 @@ const currentFrame = index => (
     `frames/ezgif-frame-${(index + 1).toString().padStart(3, '0')}.jpg`
 );
 
-const images = [];
+const images = new Array(frameCount);
 const imageSeq = { frame: 0 };
 
-// Preload Images with Progress
-let loadedCount = 0;
+
 const loader = document.getElementById('loader');
 const progressText = document.getElementById('load-progress');
-let initialized = false;
+let loadedCount = 0;
 
-for (let i = 0; i < frameCount; i++) {
-    const img = new Image();
-    img.onload = () => {
+// Proper Sequential Loader to prevent network bottlenecking
+function loadImagesProperly() {
+    // First, load frame 0 to show the screen immediately
+    const firstImg = new Image();
+    firstImg.onload = () => {
+        images[0] = firstImg;
         loadedCount++;
         progressText.innerText = Math.round((loadedCount / frameCount) * 100);
+        initAnimation();
 
-        if (!initialized && loadedCount >= 3) {
-            initialized = true;
-            initAnimation();
-        }
+        // After first image is ready, load the rest in small batches to preserve bandwidth
+        loadRestInBatches(1);
     };
-    img.src = currentFrame(i);
-    images.push(img);
+    firstImg.src = currentFrame(0);
+}
+
+function loadRestInBatches(startIndex) {
+    const batchSize = 3; // Load 3 images at a time so Vercel doesn't block requests
+    let i = startIndex;
+
+    function loadNextBatch() {
+        if (i >= frameCount) return;
+
+        let batchPromises = [];
+        for (let j = 0; j < batchSize && i + j < frameCount; j++) {
+            const index = i + j;
+            batchPromises.push(new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                    images[index] = img;
+                    loadedCount++;
+                    // Update progress softly in the background just in case
+                    if (progressText) {
+                        progressText.innerText = Math.round((loadedCount / frameCount) * 100);
+                    }
+                    // Trigger a re-render if the user is currently looking at this frame
+                    if (imageSeq.frame === index) render();
+                    resolve();
+                };
+                img.onerror = () => resolve(); // handle missing frames safely
+                img.src = currentFrame(index);
+            }));
+        }
+
+        Promise.all(batchPromises).then(() => {
+            i += batchSize;
+            loadNextBatch();
+        });
+    }
+
+    loadNextBatch();
 }
 
 function initAnimation() {
-    // Hide loader
+    // Hide loader smoothly
     loader.style.opacity = '0';
     setTimeout(() => { loader.style.display = 'none'; }, 800);
 
@@ -57,7 +94,7 @@ function initAnimation() {
             trigger: "body",
             start: "top top",
             end: "bottom bottom",
-            scrub: 1, // Reduced from 1.5 to 1 for tighter response
+            scrub: 1,
         },
         onUpdate: render
     });
@@ -65,6 +102,7 @@ function initAnimation() {
 
 function render() {
     const img = images[imageSeq.frame];
+    // Only render if image is fully loaded and decoded
     if (img && img.complete && img.naturalWidth !== 0) {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -75,7 +113,6 @@ function render() {
         const w = img.width * r;
         const h = img.height * r;
 
-        // High quality image smoothing
         context.imageSmoothingEnabled = true;
         context.imageSmoothingQuality = "high";
 
@@ -87,6 +124,9 @@ function render() {
         );
     }
 }
+
+// Start the loading process
+loadImagesProperly();
 
 // Fade in animations for sections as they scroll into view
 gsap.utils.toArray('.fade-in').forEach(section => {
