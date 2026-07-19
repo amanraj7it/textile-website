@@ -24,6 +24,7 @@ const imageSeq = { frame: 0 };
 let loadedCount = 0;
 const loader = document.getElementById('loader');
 const progressText = document.getElementById('load-progress');
+let initialized = false;
 
 for (let i = 0; i < frameCount; i++) {
     const img = new Image();
@@ -31,8 +32,8 @@ for (let i = 0; i < frameCount; i++) {
         loadedCount++;
         progressText.innerText = Math.round((loadedCount / frameCount) * 100);
 
-        if (loadedCount === frameCount) {
-            // All images loaded
+        if (!initialized && loadedCount >= 3) {
+            initialized = true;
             initAnimation();
         }
     };
@@ -63,22 +64,23 @@ function initAnimation() {
 }
 
 function render() {
-    if (images[imageSeq.frame]) {
+    const img = images[imageSeq.frame];
+    if (img && img.complete && img.naturalWidth !== 0) {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         const r = Math.max(
-            canvas.width / images[imageSeq.frame].width,
-            canvas.height / images[imageSeq.frame].height
+            canvas.width / img.width,
+            canvas.height / img.height
         );
-        const w = images[imageSeq.frame].width * r;
-        const h = images[imageSeq.frame].height * r;
+        const w = img.width * r;
+        const h = img.height * r;
 
         // High quality image smoothing
         context.imageSmoothingEnabled = true;
         context.imageSmoothingQuality = "high";
 
         context.drawImage(
-            images[imageSeq.frame],
+            img,
             (canvas.width - w) / 2,
             (canvas.height - h) / 2,
             w, h
