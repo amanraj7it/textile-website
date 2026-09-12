@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "frames"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "website2"
+	}
+}
